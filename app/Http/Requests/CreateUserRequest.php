@@ -26,7 +26,8 @@ class CreateUserRequest extends FormRequest
             'username' => ['required', 'unique:users,username'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required'],
-            'role_id' => ['required', 'exists:roles,id']
+            'role_id' => ['required', 'exists:roles,id'],
+            'direcciones' => ['array']
         ];
     }
 
@@ -40,7 +41,7 @@ class CreateUserRequest extends FormRequest
             'email.unique' => 'El email ya esta en uso',
             'password.required' => 'La contraseña es requerida',
             'role_id.required' => 'El rol del usuario es requerido',
-            'role_id.exists' => 'El rol seleccionado no existe'
+            'role_id.exists' => 'El rol seleccionado no existe',
         ];
     }
 }

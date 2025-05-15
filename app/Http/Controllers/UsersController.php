@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Resources\UsersResource;
 use App\Models\User;
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -31,12 +32,19 @@ class UsersController extends Controller
         try {
             $role = Role::find($data['role_id']);
 
-            User::create([
+            $user = User::create([
                 'name' => $data['name'],
                 'username' => $data['username'],
                 'email' => $data['email'],
                 'password' => $data['password']
             ])->assignRole($role->name);
+
+            foreach ($data['direcciones'] as $key => $value) {
+                UserAddress::create([
+                    'user_id' => $user->id,
+                    'address_id' => $value
+                ]);
+            }
 
             return response()->json('Usuario Creado Correctamente', 200);
         } catch (\Throwable $th) {
