@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class StatusesResource extends JsonResource
+class GarbageCollectionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,7 +16,11 @@ class StatusesResource extends JsonResource
     {
         return [
             'id' => strval($this->id),
-            'name' => $this->name
+            'user' => $this->user->name,
+            'address' => new AddressesResource($this->address),
+            'status' => new StatusesResource($this->status),
+            'collector' => $this->collector->name,
+            'fecha_recoleccion' => $this->fecha_recoleccion->format('d-m-Y')
         ];
     }
 }

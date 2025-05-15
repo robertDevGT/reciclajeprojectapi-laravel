@@ -16,9 +16,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/users', UsersController::class)->middleware('role:admin');
     Route::apiResource('/statuses', StatusesController::class)->middleware('role:admin');
 
-    Route::apiResource('/collectors',CollectorsController::class)->middleware('role:admin');
-
-    Route::apiResource('/garbage-collection-requests',GarbageCollectionRequestsController::class);
+    Route::apiResource('/collectors', CollectorsController::class)->middleware('role:admin');
+    Route::apiResource('/garbage-collection-requests', GarbageCollectionRequestsController::class);
 });
 
 //Autenticación
