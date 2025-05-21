@@ -14,16 +14,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('/roles', RolesController::class)->middleware('role:admin');
     Route::apiResource('/addresses', AddressesController::class)->middleware('role:admin');
-    
-    Route::get('/user/role',[UserController::class,'getRole']);
+    Route::apiResource('/users', UsersController::class)->middleware('role:admin');
 
-    Route::apiResource('/user',UserController::class)->middleware('role:admin');
+    Route::get('/user/role', [UserController::class, 'getRole']);
 
     Route::apiResource('/statuses', StatusesController::class)->middleware('role:admin');
 
     Route::apiResource('/collectors', CollectorsController::class)->middleware('role:admin');
     Route::apiResource('/garbage-collection-requests', GarbageCollectionRequestsController::class);
-
 });
 
 //Autenticación
