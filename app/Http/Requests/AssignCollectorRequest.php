@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateGarbageCollectionRequestsRequest extends FormRequest
+class AssignCollectorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,19 +22,18 @@ class CreateGarbageCollectionRequestsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'address_id' => ['required', 'exists:addresses,id'],
-            'status_id' => ['required', 'exists:statuses,id'],
-            'fecha_recoleccion' => ['required']
+            'request_id' => 'required|exists:garbage_collection_requests,id',
+            'collector_id' => 'required|exists:collectors,id',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'address_id.required' => 'La dirección es requerida',
-            'address_id.exists' => 'La dirección no esta registrada',
-            'status_id.required' => 'El estado es requerido',
-            'fecha_recoleccion.required' => 'La fecha de recolección es requerida',
+            'request_id.required' => 'La solicitud es requerida',
+            'request_id.exists' => 'La solicitud no existe',
+            'collector_id.required' => 'El recolector es requerido',
+            'collector_id.exists' => 'El recolector no existe',
         ];
     }
 }

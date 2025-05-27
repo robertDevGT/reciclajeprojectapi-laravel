@@ -10,7 +10,6 @@ class GarbageCollectionRequest extends Model
         'user_id',
         'address_id',
         'status_id',
-        'collector_id',
         'fecha_recoleccion'
     ];
 
@@ -33,8 +32,9 @@ class GarbageCollectionRequest extends Model
         return $this->belongsTo(Status::class);
     }
 
-    public function collector()
+    public function assignment()
     {
-        return $this->belongsTo(Collector::class);
+        return $this->hasOne(GarbageCollectionRequestCollector::class, 'request_id','id');
     }
+
 }

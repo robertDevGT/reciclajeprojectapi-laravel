@@ -18,8 +18,8 @@ class GarbageCollectionResource extends JsonResource
             'id' => strval($this->id),
             'user' => $this->user->name,
             'address' => new AddressesResource($this->address),
-            'status' => new StatusesResource($this->status),
-            'collector' => $this->collector->name,
+            'status' => $this->status->name,
+            'collector' => $this->assignment ? $this->assignment->collector->name : '',
             'fecha_recoleccion' => $this->fecha_recoleccion->format('d-m-Y')
         ];
     }

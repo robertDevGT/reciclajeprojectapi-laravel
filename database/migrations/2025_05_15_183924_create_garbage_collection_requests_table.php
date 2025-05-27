@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->foreignId('address_id')->constrained();
             $table->foreignId('status_id')->constrained();
-            $table->foreignId('collector_id')->constrained();
             $table->datetime('fecha_recoleccion');
             $table->timestamps();
         });
