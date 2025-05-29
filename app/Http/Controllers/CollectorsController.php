@@ -6,6 +6,9 @@ use App\Http\Requests\CreateCollectorRequest;
 use App\Http\Resources\CollectorsResource;
 use App\Models\Collector;
 use Illuminate\Http\Request;
+use App\Http\Resources\GarbageCollectionResource;
+use App\Models\GarbageCollectionRequest;
+
 
 class CollectorsController extends Controller
 {
@@ -106,5 +109,21 @@ class CollectorsController extends Controller
                 'msg' => 'Hubo un error al eliminar el recolector'
             ], 500);
         }
+    }
+
+    public function GetRequestsByCollector(Request $request)
+    {
+        $query = GarbageCollectionRequest::query();
+
+        $query->whereHas('assignment', function ($query) use ($request) {
+            $query->where('collector_id', $request->user()->id);
+        });
+
+        if ($request->query('status')) {
+            $query->where('status_id', $request->query('status'));
+        }
+
+
+        return GarbageCollectionResource::collection($query->get());
     }
 }

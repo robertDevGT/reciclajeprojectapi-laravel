@@ -139,4 +139,5 @@ class GarbageCollectionRequestsController extends Controller
             ], 500);
         }
     }
+
 }
